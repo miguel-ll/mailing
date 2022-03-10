@@ -10,7 +10,7 @@ server = smtplib.SMTP(host, port)
 msg = EmailMessage()
 
 if len(sys.argv) < 6 or len(sys.argv) > 7:
-	sys.exit("Provide the arguments correctly!\nExample: python emailsender.py py@gmail.com python123 receiver@gmail.com subject blablabla\nIf you want to attach a file, it will be the sixth argument.")
+	sys.exit("Provide the arguments correctly!\nExample: python emailsender.py py@gmail.com python123 receiver@gmail.com subject blablabla\nIf you want to attach a file, it will be the sixth argument.\nThe fifth argument can also be a text file (it will send what is written inside the file).")
 
 def get_file_type(x):
     return str(x).rsplit('.')[1]
