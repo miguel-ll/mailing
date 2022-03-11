@@ -1,7 +1,6 @@
 import smtplib
 from email.message import EmailMessage
 import sys
-#import os.path
 from os import path
 
 host = "smtp.gmail.com"
@@ -9,8 +8,8 @@ port = 587
 server = smtplib.SMTP(host, port)
 msg = EmailMessage()
 
-if len(sys.argv) < 6 or len(sys.argv) > 7:
-	sys.exit("Provide the arguments correctly!\nExample: python emailsender.py py@gmail.com python123 receiver@gmail.com subject blablabla\nIf you want to attach a file, it will be the sixth argument.\nThe fifth argument can also be a text file (it will send what is written inside the file).")
+if len(sys.argv) < 6:
+	sys.exit("Provide the arguments correctly!\nExample: python emailsender.py py@gmail.com python123 receiver@gmail.com subject (your message, in quotation marks)\nIf you want to attach a file, it will be the sixth argument.\nThe fifth argument can also be a text file (it will send what is written inside the file).")
 
 def get_file_type(x):
     return str(x).rsplit('.')[1]
@@ -41,11 +40,14 @@ def send_email():
     msg["Subject"] = str(sys.argv[4])
     msg.set_content(is_txt(str(sys.argv[5])))
     if len(sys.argv) > 6:
-        add_file(sys.argv[6])
+        for x in range(6, len(sys.argv)):
+            add_file(sys.argv[x])
     server.starttls()
     server.login(FROM, PASSWORD)
     server.send_message(msg)
     server.quit()
     print("Email Sent")
-
-send_email()
+try:
+    send_email()
+except:
+    print("Error.\nUse: python emailsender.py py@gmail.com python123 receiver@gmail.com subject (your message, in quotation marks)\nIf you want to attach a file, it will be the sixth argument.\nThe fifth argument can also be a text file (it will send what is written inside the file)")
