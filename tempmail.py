@@ -1,6 +1,7 @@
 import requests
 from gen import *
 from mailtm import Email
+import pyperclip
 
 def domains():
     base_url = "https://api.mail.tm/"
@@ -36,7 +37,9 @@ def main():
     if len(username) == 0:
         username = gen_user()
     password = gen_pass()
-    print(f"Your email address: \nE-Mail: {username}@{domain_mail}")
+    addr = f"{username}@{domain_mail}"
+    print(f"Your email address: \nE-Mail: {addr}")
+    pyperclip.copy(addr)
     mail(username, password, domain_mail)
 
 def mail(username, password, domain_mail):
