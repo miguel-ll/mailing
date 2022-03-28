@@ -2,7 +2,8 @@ import sec
 import sys
 
 def get_email():
-	email = sec.generate_email(1)[0]
+    email = sec.generate_email(1)[0]
+    pyperclip.copy(email)
     print(f"your email address is {email}")
     print("waiting for emails...")
     global email
