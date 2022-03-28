@@ -1,5 +1,6 @@
 import sec
 import sys
+import pyperclip
 
 def get_email():
     email = sec.generate_email(1)[0]
